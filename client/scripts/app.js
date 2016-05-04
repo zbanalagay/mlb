@@ -20,7 +20,19 @@
         gamesArray.push(gameObj);
       }
       console.log(gamesArray);
+      //TODO research if the context & canvas should be in here or before getting JSON
+      var canvas = document.getElementById('display');
+
+      if(canvas.getContext){
+        var context = canvas.getContext('2d');
+        
+        // TODO try webgl context later
+
+      }
     }
   }
 
 })();
+
+
+//TODO onload attribute
