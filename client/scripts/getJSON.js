@@ -1,7 +1,7 @@
 ;(function(){
   'use strict';
 
-  mlb.getJSON = function(url){
+  mlb.getJSON = function(url, callback){
     var request = new XMLHttpRequest();
     request.open("get", url, true);
     request.responseType = "json";
@@ -9,9 +9,9 @@
       if(request.readyState === 4){
         var status = request.status;
         if(status === 200){
-          console.log(request.response);
+          callback(null, request.response)
         } else{
-          console.error(request.statusText);
+          callback(status)
         }
       }
     };
