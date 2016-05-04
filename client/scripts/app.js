@@ -1,1 +1,3 @@
-//Initial commit// 
+;(function(){
+  'use strict';
+})();
