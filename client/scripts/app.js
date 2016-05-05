@@ -1,7 +1,9 @@
 ;(function(){
   'use strict';
-  mlb.canvas.width = window.innerWidth;
+
+  mlb.canvas.width = window.innerWidth;  
   mlb.getJSON("http://gdx.mlb.com/components/game/mlb/year_2016/month_04/day_29/master_scoreboard.json", responseIsReturned);
+
 
   function responseIsReturned(err, response){
     if(err !== null){
@@ -24,7 +26,6 @@
 
       if(mlb.canvas.getContext){
         var context = mlb.canvas.getContext('2d');
-
 
         // TODO try webgl context later
 
