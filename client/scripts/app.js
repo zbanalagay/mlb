@@ -33,17 +33,35 @@
           img.height = gamesArray[j].videoThumbnails[0].height;
           img.onload = (function(img,j){
               return function(){
-                context.drawImage(img, j* img.width, img.height);
+                context.drawImage(img, j * img.width, img.height/2);
               }
           })(img,j);
         }
       }
-      
+
+
+      //test
+      document.onkeydown = checkKey;
+
+      function checkKey(e){
+        e = e || window.event;
+        console.log('Sookie')
+        if(e.keyCode === 37){
+          console.log('left arrow');
+          //go backwards
+        } else if (e.keyCode === 39){
+          console.log('right arrow');
+          //go forwards
+        }
+      }
     }
   }
 
 })();
 
+
+//TODO make images selectable
+//TODO scroll through images
 
 //TODO onload attribute
 //TODO after this all works make the load faster
