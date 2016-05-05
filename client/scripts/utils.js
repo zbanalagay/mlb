@@ -23,12 +23,4 @@
 
   mlb.canvas = document.getElementById('display');
 
-  mlb.resize = function(){
-    if(mlb.canvas.width !== window.innerWidth){
-      mlb.canvas.width = window.innerWidth;
-    }
-    if(mlb.canvas.height !== (window.innerHeight/5)){
-      mlb.canvas.height = (window.innerHeight/5)
-    }
-  }
 })();
