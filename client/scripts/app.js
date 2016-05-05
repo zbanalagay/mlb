@@ -33,17 +33,22 @@
           img.height = gamesArray[j].videoThumbnails[0].height;
           img.onload = (function(img,j){
               return function(){
+                context.save();
                 context.drawImage(img, j* img.width, img.height);
+                context.restore();
               }
           })(img,j);
         }
       }
-      
+
     }
   }
 
 })();
 
+
+//TODO make images selectable
+//TODO scroll through images
 
 //TODO onload attribute
 //TODO after this all works make the load faster
