@@ -1,3 +1,13 @@
 body {
   background: url(http://mlb.mlb.com/mlb/images/devices/ballpark/1920x1080/1.jpg) no-repeat center center fixed;
 }
+canvas {
+    padding: 0;
+    margin: auto;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
