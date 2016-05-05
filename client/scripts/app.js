@@ -34,7 +34,7 @@
           img.onload = (function(img,j){
               return function(){
                 context.save();
-                context.drawImage(img, j* img.width, img.height);
+                context.drawImage(img, j* img.width, img.height/2);
                 context.restore();
               }
           })(img,j);
