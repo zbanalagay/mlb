@@ -1,28 +1,6 @@
 ;(function(){
   'use strict';
 
-  //test for key stroke
-  document.onkeydown = checkKey;
-  document.onkeyup = keyup;
-
-  function checkKey(e){
-    e = e || window.event;
-    console.log(e)
-    if(e.keyCode === 37){
-      console.log('left arrow');
-      //go backwards
-    } else if (e.keyCode === 39){
-      console.log('right arrow');
-      //go forwards
-    }
-  }
-
-  function keyup(){
-    console.log( 'keyup');
-    // stop scrolling
-  }
-
-
   mlb.canvas.width = window.innerWidth;
   mlb.getJSON("http://gdx.mlb.com/components/game/mlb/year_2016/month_04/day_29/master_scoreboard.json", responseIsReturned);
 
@@ -66,10 +44,27 @@
         })(img,j);
       }
 
-      mlb.canvas.addEventListener('click', function(event){
-        console.log('clicky happened')
-        
-      })
+
+      document.addEventListener('keydown', doKeyEvent, true);
+      document.addEventListener('keyup' , doKeyUp, true);
+
+      function doKeyEvent(event){
+        console.log('clicky happened');
+        event = event || window.event;
+        if(event.keyCode ===37){
+          console.log('left arrow');
+          console.log(mlb.canvas.getBoundingClientRect(), 'canvas left key')
+          //go backwards
+        } else if (event.keyCode === 39){
+          console.log('right arrow ');
+            console.log(mlb.canvas.getBoundingClientRect(), 'canvas right key')
+          //go forwards
+        }
+      }
+      function doKeyup(){
+        console.log( 'keyup');
+        // stop scrolling
+      }
     }
   }
 })();
