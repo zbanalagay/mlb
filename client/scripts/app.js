@@ -57,12 +57,19 @@
         img.src = gamesArray[j].videoThumbnails[0].content;
         img.width = gamesArray[j].videoThumbnails[0].width;
         img.height = gamesArray[j].videoThumbnails[0].height;
+        img.setAttribute('crossOrigin', '');
         img.onload = (function(img,j){
             return function(){
               context.drawImage(img, j * img.width, img.height/2);
+              console.log(context.getImageData(j * img.width, img.height/2, img.width, img.height), "Image data?");
             }
         })(img,j);
       }
+
+      mlb.canvas.addEventListener('click', function(event){
+        console.log('clicky happened')
+        
+      })
     }
   }
 })();
