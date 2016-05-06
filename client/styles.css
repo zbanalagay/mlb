@@ -14,3 +14,20 @@ body {
   left: 0;
   right: 0;
 }
+
+/*TODO fix positioning of images*/
+img{
+  display: inline;
+  margin: auto;
+  position: relative;
+  padding:10px;
+  clear: right;
+  /*top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;*/
+}
+
+#active{
+  transform: scale(1.25);
+}
