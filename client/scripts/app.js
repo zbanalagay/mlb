@@ -16,7 +16,7 @@
     for(var i = 0; i<response.data.games.game.length; i++){
       var gameObj = {};
 
-      gameObj.videoThumbnails = response.data.games.game[i].video_thumbnails.thumbnail;
+      gameObj.videoThumbnails = response.data.games.game[i].video_thumbnails.thumbnail[0];
       gameObj.awayTeamName = response.data.games.game[i].away_team_name;
       gameObj.homeTeamName = response.data.games.game[i].home_team_name;
       gameObj.venue = response.data.games.game[i].venue;
@@ -24,6 +24,7 @@
       gamesArray.push(gameObj);
 
       var element = document.createElement("img");
+      element.className = 'baseball'
       element.setAttribute("src", response.data.games.game[i].video_thumbnails.thumbnail[0].content);
       element.setAttribute("height", response.data.games.game[i].video_thumbnails.thumbnail[0].height);
       element.setAttribute("width", response.data.games.game[i].video_thumbnails.thumbnail[0].width);
@@ -32,32 +33,58 @@
 
     }
     console.log(gamesArray);
-
+    var count = 0;
       document.addEventListener('keydown', doKeyEvent, true);
       document.addEventListener('keyup' , doKeyUp, true);
 
+      //TODO get it to cycle
+      //TODO make it cleaner
+      //TODO possibly find away to not have to empty but just shift
+
       function doKeyEvent(event){
         console.log('clicky happened');
-        var x = event.offsetX;
-        var y = event.offsetY;
+        var k;
         event = event || window.event;
         if(event.keyCode ===37){
-          console.log('left arrow');
-          // console.log(mlb.canvas.getBoundingClientRect(), 'canvas left key')
-
-          console.log(x, y, 'offsets')
           //go backwards
+          console.log('left arrow', count);
+          document.getElementById("container").innerHTML = " ";
+          for(k = count-1; k<gamesArray.length; k++){
+            var element = document.createElement("img");
+            element.className = 'baseball'
+            element.setAttribute("src", gamesArray[k].videoThumbnails.content);
+            element.setAttribute("height", gamesArray[k].videoThumbnails.height);
+            element.setAttribute("width", gamesArray[k].videoThumbnails.width);
+            element.setAttribute("alt", gamesArray[k].homeTeamName + ' vs ' + gamesArray[k].awayTeamName);
+            mlb.container.appendChild(element);
+          }
+          count--
         } else if (event.keyCode === 39){
-          console.log('right arrow ');
-            // console.log(mlb.canvas.getBoundingClientRect(), 'canvas right key')
           //go forwards
-          console.log(x, y, 'offsets')
+          console.log('right arrow ', count);
+          document.getElementById("container").innerHTML = " ";
+          for(k = count+1; k<gamesArray.length; k++){
+            var element = document.createElement("img");
+            element.className = 'baseball'
+            element.setAttribute("src", gamesArray[k].videoThumbnails.content);
+            element.setAttribute("height", gamesArray[k].videoThumbnails.height);
+            element.setAttribute("width", gamesArray[k].videoThumbnails.width);
+            element.setAttribute("alt", gamesArray[k].homeTeamName + ' vs ' + gamesArray[k].awayTeamName);
+            mlb.container.appendChild(element);
+          }
+          count++
         }
       }
       function doKeyUp(){
         console.log( 'keyup');
         // stop scrolling
       }
+
+      // function imageShift(dir){
+      //   var img = document.getElementById("imgClickAndChange");
+      //           img.src = imgs[imgs.indexOf(img.src) + (dir || 1)] || imgs[dir ? imgs.length - 1 : 0];
+      //   }
+      // }
 
   }
 })();
