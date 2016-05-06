@@ -22,74 +22,53 @@
       gameObj.venue = response.data.games.game[i].venue;
       gameObj.date = response.data.games.game[i].original_date;
       gamesArray.push(gameObj);
-
-      var element = document.createElement("img");
-      element.className = 'baseball'
-      element.setAttribute("src", response.data.games.game[i].video_thumbnails.thumbnail[0].content);
-      element.setAttribute("height", response.data.games.game[i].video_thumbnails.thumbnail[0].height);
-      element.setAttribute("width", response.data.games.game[i].video_thumbnails.thumbnail[0].width);
-      element.setAttribute("alt", response.data.games.game[i].home_team_name + ' vs ' + response.data.games.game[i].away_team_name);
-      mlb.container.appendChild(element);
-
     }
-    console.log(gamesArray);
-    var count = 0;
-      document.addEventListener('keydown', doKeyEvent, true);
-      document.addEventListener('keyup' , doKeyUp, true);
+    makeImgTags(gamesArray);
+    document.addEventListener('keydown', doKeyEvent, true);
+      // document.addEventListener('keyup' , doKeyUp, true);
 
-      //TODO get it to cycle
       //TODO make it cleaner
       //TODO possibly find away to not have to empty but just shift
-
-      function doKeyEvent(event){
-        console.log('clicky happened');
-        var k;
-        event = event || window.event;
-        if(event.keyCode ===37){
-          //go backwards
-          console.log('left arrow', count);
-          document.getElementById("container").innerHTML = " ";
-          for(k = count-1; k<gamesArray.length; k++){
-            var element = document.createElement("img");
-            element.className = 'baseball'
-            element.setAttribute("src", gamesArray[k].videoThumbnails.content);
-            element.setAttribute("height", gamesArray[k].videoThumbnails.height);
-            element.setAttribute("width", gamesArray[k].videoThumbnails.width);
-            element.setAttribute("alt", gamesArray[k].homeTeamName + ' vs ' + gamesArray[k].awayTeamName);
-            mlb.container.appendChild(element);
+    function makeImgTags(gamesArray){
+        for(var k = 0; k<5; k++){
+          var element = document.createElement("img");
+          if(k === 2){
+            element.id = "active"
           }
-          count--
-        } else if (event.keyCode === 39){
-          //go forwards
-          console.log('right arrow ', count);
-          document.getElementById("container").innerHTML = " ";
-          for(k = count+1; k<gamesArray.length; k++){
-            var element = document.createElement("img");
-            element.className = 'baseball'
-            element.setAttribute("src", gamesArray[k].videoThumbnails.content);
-            element.setAttribute("height", gamesArray[k].videoThumbnails.height);
-            element.setAttribute("width", gamesArray[k].videoThumbnails.width);
-            element.setAttribute("alt", gamesArray[k].homeTeamName + ' vs ' + gamesArray[k].awayTeamName);
-            mlb.container.appendChild(element);
-          }
-          count++
+          element.setAttribute("src", gamesArray[k].videoThumbnails.content);
+          element.setAttribute("height", gamesArray[k].videoThumbnails.height);
+          element.setAttribute("width", gamesArray[k].videoThumbnails.width);
+          element.setAttribute("alt", gamesArray[k].homeTeamName + ' vs ' + gamesArray[k].awayTeamName);
+          mlb.container.appendChild(element);
         }
       }
-      function doKeyUp(){
-        console.log( 'keyup');
-        // stop scrolling
+    function doKeyEvent(event){
+      var k;
+      var temp;
+      event = event || window.event;
+      if(event.keyCode ===37){
+          //go backwards
+        document.getElementById("container").innerHTML = " ";
+        temp= gamesArray.shift();
+        gamesArray.push(temp)
+        makeImgTags(gamesArray);
+      } else if (event.keyCode === 39){
+          //go forwards
+        document.getElementById("container").innerHTML = " ";
+        temp = gamesArray.pop();
+        gamesArray.unshift(temp);
+        makeImgTags(gamesArray);
       }
-
-      // function imageShift(dir){
-      //   var img = document.getElementById("imgClickAndChange");
-      //           img.src = imgs[imgs.indexOf(img.src) + (dir || 1)] || imgs[dir ? imgs.length - 1 : 0];
-      //   }
+    }
+      // function doKeyUp(){
+      //   console.log( 'keyup');
+      //   // stop scrolling
       // }
 
   }
 })();
 
-//TODO refactor without canvas to make it work first
+//TODO refactor back to Canvas because it doesnt actually attach to the DOM
 //TODO make images selectable
 //TODO scroll through images
   //center img starts big, when scrolling, whatever img is there, becomes big --> need selected variable?
