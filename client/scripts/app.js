@@ -30,16 +30,20 @@
       //TODO make it cleaner
       //TODO possibly find away to not have to empty but just shift
     function makeImgTags(gamesArray){
-        for(var k = 0; k<5; k++){
+        for(var k = 0; k<gamesArray.length; k++){
           var element = document.createElement("img");
-          if(k === 2){
+          if(k === 4){
             element.id = "active"
+            // var headline = document.createElement("h1");
+            // var text = document.createTextNode( gamesArray[k].homeTeamName + ' vs ' + gamesArray[k].awayTeamName);
+            // headline.appendChild(text);
+            // mlb.container.appendChild(headline);
           }
           element.setAttribute("src", gamesArray[k].videoThumbnails.content);
           element.setAttribute("height", gamesArray[k].videoThumbnails.height);
           element.setAttribute("width", gamesArray[k].videoThumbnails.width);
           element.setAttribute("alt", gamesArray[k].homeTeamName + ' vs ' + gamesArray[k].awayTeamName);
-          mlb.container.appendChild(element);
+          mlb.imageContainer.appendChild(element);
         }
       }
     function doKeyEvent(event){
@@ -48,13 +52,13 @@
       event = event || window.event;
       if(event.keyCode ===37){
           //go backwards
-        document.getElementById("container").innerHTML = " ";
+        mlb.imageContainer.innerHTML = " ";
         temp= gamesArray.shift();
         gamesArray.push(temp)
         makeImgTags(gamesArray);
       } else if (event.keyCode === 39){
           //go forwards
-        document.getElementById("container").innerHTML = " ";
+        mlb.imageContainer.innerHTML = " ";
         temp = gamesArray.pop();
         gamesArray.unshift(temp);
         makeImgTags(gamesArray);
