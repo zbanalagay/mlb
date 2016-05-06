@@ -16,54 +16,63 @@
     for(var i = 0; i<response.data.games.game.length; i++){
       var gameObj = {};
 
-      gameObj.videoThumbnails = response.data.games.game[i].video_thumbnails.thumbnail;
+      gameObj.videoThumbnails = response.data.games.game[i].video_thumbnails.thumbnail[0];
       gameObj.awayTeamName = response.data.games.game[i].away_team_name;
       gameObj.homeTeamName = response.data.games.game[i].home_team_name;
       gameObj.venue = response.data.games.game[i].venue;
       gameObj.date = response.data.games.game[i].original_date;
       gamesArray.push(gameObj);
     }
-    console.log(gamesArray);
+    makeImgTags(gamesArray);
+    document.addEventListener('keydown', doKeyEvent, true);
+      // document.addEventListener('keyup' , doKeyUp, true);
 
-      for(var j = 0; j<gamesArray.length; j++){
-        var element = document.createElement("img");
-        element.setAttribute("src", gamesArray[j].videoThumbnails[0].content);
-        element.setAttribute("height", gamesArray[j].videoThumbnails[0].height);
-        element.setAttribute("width", gamesArray[j].videoThumbnails[0].width);
-        element.setAttribute("alt", gamesArray[j].homeTeamName + ' vs ' + gamesArray[j].awayTeamName);
-        mlb.container.appendChild(element);
-      }
-
-      document.addEventListener('keydown', doKeyEvent, true);
-      document.addEventListener('keyup' , doKeyUp, true);
-
-      function doKeyEvent(event){
-        console.log('clicky happened');
-        var x = event.offsetX;
-        var y = event.offsetY;
-        event = event || window.event;
-        if(event.keyCode ===37){
-          console.log('left arrow');
-          // console.log(mlb.canvas.getBoundingClientRect(), 'canvas left key')
-
-          console.log(x, y, 'offsets')
-          //go backwards
-        } else if (event.keyCode === 39){
-          console.log('right arrow ');
-            // console.log(mlb.canvas.getBoundingClientRect(), 'canvas right key')
-          //go forwards
-          console.log(x, y, 'offsets')
+      //TODO make it cleaner
+      //TODO possibly find away to not have to empty but just shift
+    function makeImgTags(gamesArray){
+        for(var k = 0; k<gamesArray.length; k++){
+          var element = document.createElement("img");
+          if(k === 4){
+            element.id = "active"
+            // var headline = document.createElement("h1");
+            // var text = document.createTextNode( gamesArray[k].homeTeamName + ' vs ' + gamesArray[k].awayTeamName);
+            // headline.appendChild(text);
+            // mlb.container.appendChild(headline);
+          }
+          element.setAttribute("src", gamesArray[k].videoThumbnails.content);
+          element.setAttribute("height", gamesArray[k].videoThumbnails.height);
+          element.setAttribute("width", gamesArray[k].videoThumbnails.width);
+          element.setAttribute("alt", gamesArray[k].homeTeamName + ' vs ' + gamesArray[k].awayTeamName);
+          mlb.imageContainer.appendChild(element);
         }
       }
-      function doKeyUp(){
-        console.log( 'keyup');
-        // stop scrolling
+    function doKeyEvent(event){
+      var k;
+      var temp;
+      event = event || window.event;
+      if(event.keyCode ===37){
+          //go backwards
+        mlb.imageContainer.innerHTML = " ";
+        temp= gamesArray.shift();
+        gamesArray.push(temp)
+        makeImgTags(gamesArray);
+      } else if (event.keyCode === 39){
+          //go forwards
+        mlb.imageContainer.innerHTML = " ";
+        temp = gamesArray.pop();
+        gamesArray.unshift(temp);
+        makeImgTags(gamesArray);
       }
+    }
+      // function doKeyUp(){
+      //   console.log( 'keyup');
+      //   // stop scrolling
+      // }
 
   }
 })();
 
-//TODO refactor without canvas to make it work first
+//TODO refactor back to Canvas because it doesnt actually attach to the DOM
 //TODO make images selectable
 //TODO scroll through images
   //center img starts big, when scrolling, whatever img is there, becomes big --> need selected variable?
