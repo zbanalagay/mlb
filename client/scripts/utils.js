@@ -21,5 +21,5 @@
     request.send();
   }
 
-  mlb.container = document.getElementById('container');
+  mlb.imageContainer = document.getElementById('imageContainer');
 })();
