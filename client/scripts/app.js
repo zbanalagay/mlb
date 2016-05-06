@@ -22,17 +22,16 @@
       gameObj.venue = response.data.games.game[i].venue;
       gameObj.date = response.data.games.game[i].original_date;
       gamesArray.push(gameObj);
+
+      var element = document.createElement("img");
+      element.setAttribute("src", response.data.games.game[i].video_thumbnails.thumbnail[0].content);
+      element.setAttribute("height", response.data.games.game[i].video_thumbnails.thumbnail[0].height);
+      element.setAttribute("width", response.data.games.game[i].video_thumbnails.thumbnail[0].width);
+      element.setAttribute("alt", response.data.games.game[i].home_team_name + ' vs ' + response.data.games.game[i].away_team_name);
+      mlb.container.appendChild(element);
+
     }
     console.log(gamesArray);
-
-      for(var j = 0; j<gamesArray.length; j++){
-        var element = document.createElement("img");
-        element.setAttribute("src", gamesArray[j].videoThumbnails[0].content);
-        element.setAttribute("height", gamesArray[j].videoThumbnails[0].height);
-        element.setAttribute("width", gamesArray[j].videoThumbnails[0].width);
-        element.setAttribute("alt", gamesArray[j].homeTeamName + ' vs ' + gamesArray[j].awayTeamName);
-        mlb.container.appendChild(element);
-      }
 
       document.addEventListener('keydown', doKeyEvent, true);
       document.addEventListener('keyup' , doKeyUp, true);
