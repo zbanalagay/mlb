@@ -21,6 +21,5 @@
     request.send();
   }
 
-  mlb.canvas = document.getElementById('display');
-
+  mlb.container = document.getElementById('container');
 })();
