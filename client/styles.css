@@ -44,32 +44,36 @@ img{
   right: 0;*/
 }
 
-.active{
+#imageContainer .active{
   margin: auto;
   overflow: auto;
   display: inline;
   height:100%;
-  background-color: blue;
+  /*background-color: blue;*/
+  z-index: 1;
 }
 
 .active img{
   transform: scale(1.25);
-  background-color: red;
+  /*background-color: red;*/
 }
 
 .active h2{
   color:white;
-  font-size: 30px;
+  font-size: 20px;
   display:inline-block;
   position: absolute;
-  background-color: yellow;
+  padding-top: 10px;
+  text-align: center;
+  /*background-color: yellow;*/
   /*margin-bottom: 200px;*/
 }
 
-.active h4{
+#imageContainer .active h4{
   color:white;
   font-size: 16px;
   position: absolute;
-  padding-top: 150px;
-  background-color: green;
+  padding-top: 160px;
+  text-align: center;
+  /*background-color: green;*/
 }
