@@ -47,8 +47,9 @@
             headline.innerHTML = gamesArray[k].homeTeamName + ' vs ' + gamesArray[k].awayTeamName;
             subtitle.innerHTML = '@ '+ gamesArray[k].venue;
             activeContainer.appendChild(headline);
-            activeContainer.appendChild(element);
             activeContainer.appendChild(subtitle);
+            activeContainer.appendChild(element);
+            // activeContainer.appendChild(subtitle);
             mlb.imageContainer.appendChild(activeContainer);
           }else{
               mlb.imageContainer.appendChild(element);
