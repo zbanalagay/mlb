@@ -20,32 +20,41 @@
       gameObj.awayTeamName = response.data.games.game[i].away_team_name;
       gameObj.homeTeamName = response.data.games.game[i].home_team_name;
       gameObj.venue = response.data.games.game[i].venue;
-      gameObj.date = response.data.games.game[i].original_date;
+      // gameObj.date = response.data.games.game[i].original_date;
       gamesArray.push(gameObj);
     }
     makeImgTags(gamesArray);
     document.addEventListener('keydown', doKeyEvent, true);
-      // document.addEventListener('keyup' , doKeyUp, true);
 
       //TODO make it cleaner
       //TODO possibly find away to not have to empty but just shift
     function makeImgTags(gamesArray){
+
         for(var k = 0; k<gamesArray.length; k++){
           var element = document.createElement("img");
-          if(k === 4){
-            element.id = "active"
-            // var headline = document.createElement("h1");
-            // var text = document.createTextNode( gamesArray[k].homeTeamName + ' vs ' + gamesArray[k].awayTeamName);
-            // headline.appendChild(text);
-            // mlb.container.appendChild(headline);
-          }
           element.setAttribute("src", gamesArray[k].videoThumbnails.content);
           element.setAttribute("height", gamesArray[k].videoThumbnails.height);
           element.setAttribute("width", gamesArray[k].videoThumbnails.width);
           element.setAttribute("alt", gamesArray[k].homeTeamName + ' vs ' + gamesArray[k].awayTeamName);
-          mlb.imageContainer.appendChild(element);
+          if(k === 4){
+            var activeContainer = document.createElement("div");
+            activeContainer.className = "active";
+            var headline = document.createElement("h2");
+            headline.className = "active";
+            var subtitle = document.createElement("h4");
+            subtitle.className = "active";
+
+            headline.innerHTML = gamesArray[k].homeTeamName + ' vs ' + gamesArray[k].awayTeamName;
+            subtitle.innerHTML = '@ '+ gamesArray[k].venue;
+            activeContainer.appendChild(headline);
+            activeContainer.appendChild(element);
+            activeContainer.appendChild(subtitle);
+            mlb.imageContainer.appendChild(activeContainer);
+          }else{
+              mlb.imageContainer.appendChild(element);
+          }
         }
-      }
+    }
     function doKeyEvent(event){
       var k;
       var temp;
@@ -64,11 +73,6 @@
         makeImgTags(gamesArray);
       }
     }
-      // function doKeyUp(){
-      //   console.log( 'keyup');
-      //   // stop scrolling
-      // }
-
   }
 })();
 
