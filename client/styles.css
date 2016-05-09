@@ -30,7 +30,6 @@ body {
 
 }
 
-/*TODO fix positioning of images*/
 img{
   display: inline;
   margin-top: 50px;
@@ -38,38 +37,35 @@ img{
   padding:10px;
   clear: right;
   float: none;
-  /*top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;*/
 }
 
-.active{
+#imageContainer .active{
   margin: auto;
   overflow: auto;
   display: inline;
   height:100%;
-  background-color: blue;
+  z-index: 1;
 }
 
 .active img{
   transform: scale(1.25);
-  background-color: red;
 }
 
 .active h2{
   color:white;
-  font-size: 30px;
+  font-size: 20px;
   display:inline-block;
   position: absolute;
-  background-color: yellow;
-  /*margin-bottom: 200px;*/
+  padding-top: 10px;
+  text-align: center;
+  font-family: sans-serif;
 }
 
-.active h4{
+#imageContainer .active h4{
   color:white;
   font-size: 16px;
   position: absolute;
-  padding-top: 150px;
-  background-color: green;
+  padding-top: 160px;
+  text-align: center;
+  font-family: sans-serif;
 }
