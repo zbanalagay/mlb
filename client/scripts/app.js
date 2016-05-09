@@ -15,10 +15,11 @@
     var gamesArray = [];
     for(var i = 0; i<response.data.games.game.length; i++){
       var gameObj = {};
-      gameObj.videoThumbnails = response.data.games.game[i].video_thumbnails.thumbnail[0];
-      gameObj.awayTeamName = response.data.games.game[i].away_team_name;
-      gameObj.homeTeamName = response.data.games.game[i].home_team_name;
-      gameObj.venue = response.data.games.game[i].venue;
+      var resp = response.data.games.game[i];
+      gameObj.videoThumbnails = resp.video_thumbnails.thumbnail[0];
+      gameObj.awayTeamName = resp.away_team_name;
+      gameObj.homeTeamName = resp.home_team_name;
+      gameObj.venue = resp.venue;
       gamesArray.push(gameObj);
     }
     makeImgTags(gamesArray);
@@ -32,7 +33,6 @@
           //go backwards
         temp = gamesArray.shift();
         gamesArray.push(temp)
-        // makeImgTags(gamesArray);
       } else if(event.keyCode === 39){
           //go forwards
         temp = gamesArray.pop();
