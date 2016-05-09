@@ -27,7 +27,6 @@ body {
   right: 0;
   overflow:auto;
   white-space:nowrap;
-
 }
 
 img{
@@ -43,32 +42,30 @@ img{
   margin: auto;
   overflow: auto;
   display: inline;
-  height:100%;
   z-index: 1;
+  max-width: 250px;
+  text-align: center;
+  transform: scale(1.25);
+  font-family: sans-serif;
 }
 
-.active img{
-  transform: scale(1.25);
+#imageContainer .active img{
   padding: 10px;
-  /*border: 1px solid white;*/
   z-index: 3;
 }
 
-.active h2{
+#imageContainer h2{
   color:white;
   font-size: 17px;
   display:inline-block;
   position: absolute;
   padding-top: 10px;
-  text-align: center;
-  font-family: sans-serif;
 }
 
 #imageContainer .active h4{
   color:white;
-  font-size: 14px;
+  font-size: 10px;
   position: absolute;
-  padding-top: 160px;
-  text-align: center;
-  font-family: sans-serif;
+  padding-top: 140px;
+  padding-left: 10px;
 }
