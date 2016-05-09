@@ -23,7 +23,7 @@
     }
     makeImgTags(gamesArray);
     document.addEventListener('keydown', doKeyEvent, true);
-
+    console.log(gamesArray)
     function makeImgTags(gamesArray){
         for(var k = 0; k<gamesArray.length; k++){
           var element = document.createElement('img');
