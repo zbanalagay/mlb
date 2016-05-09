@@ -23,7 +23,24 @@
     }
     makeImgTags(gamesArray);
     document.addEventListener('keydown', doKeyEvent, true);
-    console.log(gamesArray)
+
+    function doKeyEvent(event){
+      var temp;
+      event = event || window.event;
+      mlb.imageContainer.innerHTML = ' ';
+      if(event.keyCode ===37){
+          //go backwards
+        temp = gamesArray.shift();
+        gamesArray.push(temp)
+        // makeImgTags(gamesArray);
+      } else if(event.keyCode === 39){
+          //go forwards
+        temp = gamesArray.pop();
+        gamesArray.unshift(temp);
+      }
+      makeImgTags(gamesArray);
+    }
+
     function makeImgTags(gamesArray){
         for(var k = 0; k<gamesArray.length; k++){
           var element = document.createElement('img');
@@ -33,12 +50,12 @@
           element.setAttribute('alt', gamesArray[k].homeTeamName + ' vs ' + gamesArray[k].awayTeamName);
           if(k === 4){
             var activeContainer = document.createElement('div');
-            activeContainer.className = 'active';
             var headline = document.createElement('h2');
-            headline.className = 'active';
             var subtitle = document.createElement('h4');
+            activeContainer.className = 'active';
+            headline.className = 'active';
             subtitle.className = 'active';
-
+            element.className = 'active';
             headline.innerHTML = gamesArray[k].homeTeamName + ' vs ' + gamesArray[k].awayTeamName;
             subtitle.innerHTML = '@ '+ gamesArray[k].venue;
             activeContainer.appendChild(headline);
@@ -51,22 +68,5 @@
         }
     }
 
-    function doKeyEvent(event){
-      var temp;
-      event = event || window.event;
-      if(event.keyCode ===37){
-          //go backwards
-        mlb.imageContainer.innerHTML = ' ';
-        temp= gamesArray.shift();
-        gamesArray.push(temp)
-        makeImgTags(gamesArray);
-      } else if (event.keyCode === 39){
-          //go forwards
-        mlb.imageContainer.innerHTML = ' ';
-        temp = gamesArray.pop();
-        gamesArray.unshift(temp);
-        makeImgTags(gamesArray);
-      }
-    }
   }
 })();
