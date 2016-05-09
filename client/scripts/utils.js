@@ -1,6 +1,7 @@
 ;(function(){
   'use strict';
 
+  window.mlb = {};
   mlb.getJSON = function(url, callback){
     var request = new XMLHttpRequest();
     request.open("get", url, true);
